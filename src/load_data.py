@@ -13,9 +13,9 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--LABELS", type=Dict[str], default=['Computer Science', 'Physics', 'Mathematics', 'Statistics', 'Quantitative Biology', 'Quantitative Finance'],help="")
     parser.add_argument("--MODEL_NAME_OR_PATH",type=str,default="./bert-base-uncased")
-    parser.add_argument("--MAX_LEN",type=int,default=500)
-    parser.add_argument("--TRAIN_BATCH_SIZE",type=int,default=2)
-    parser.add_argument("--VALID_BATCH_SIZE",type=int,default=2)
+    parser.add_argument("--MAX_LEN",type=int,default=128)
+    parser.add_argument("--TRAIN_BATCH_SIZE",type=int,default=32)
+    parser.add_argument("--VALID_BATCH_SIZE",type=int,default=32)
     return parser.parse_args()
 
 
@@ -78,6 +78,7 @@ def data_loader(raw_csv_path,params):
     return train_loader,valid_loader
 
 if __name__ == '__main__':
+    args = parse_args()
     raw_csv_path = "./data/train.csv"
-    training_loader, validation_loader = data_loader('./data/train.csv')
+    training_loader, validation_loader = data_loader('./data/train.csv',args)
     
